@@ -1,0 +1,46 @@
+if(Game.Objects['Alchemy Lab'].minigame) throw new Error("Alchemy Bench prevented from loading by already present Alchemy Lab minigame.");
+
+Game.Win('Third-party');
+if(typeof CCSE == 'undefined') Game.LoadMod('https://pamsnowball.github.io/CookieClicker/' + (0 ? 'Beta/' : '') + 'CCSE.js');
+var M={}
+M.parent=Game.Objects['Alchemy Lab'];
+M.parent.minigame=M;
+M.loadedCount=0;
+M.version='1.0';
+M.GameVersion='2.029';
+
+M.launch=function() {
+  var M=this;
+  M.name=M.parent.minigameName;
+  M.init=function(div) {
+    if(localStorage.getItem(M.savePrefix) != null && !CCSE.save.OtherMods[M.name]) CCSE.save.OtherMods[M.name] = localStorage.getItem(M.savePrefix);
+    if(!M.parent.minigameSave && CCSE.save.OtherMods[M.name]) M.parent.minigameSave = CCSE.save.OtherMods[M.name];
+    M.saveString = M.parent.minigameSave;
+    
+    M.elements= {
+      'water':{
+        name:'Water',
+        icon:0,
+        cost:0,
+        costM:0,
+        results:['water','milk','magicWater'],
+        q:'An infinite water fountain.',
+      },
+      
+      'sugar':{
+        name:'Sugar Sack'
+        icon:1,
+        cost:5,
+        costM:100,
+        results:['sugar','milk','sugarLump','basicCake','yummiCake','sadCookie','yogurt'],
+        effsStr:'<div class="green">&bull; +1% CpS boost for an hour</div>',
+        q:'A sack of sugar, harvested by happy unpaid grandmas.',
+      },
+      
+      'milk':{
+        name:'Moo's Milk',
+        icon:2,
+        cost:15,
+        costM:250,
+      }
+}
